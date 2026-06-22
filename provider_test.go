@@ -18,7 +18,7 @@ func TestApplyFlag_WritesFlagdFractional(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		path, method, auth = r.URL.Path, r.Method, r.Header.Get("Authorization")
 		b, _ := io.ReadAll(r.Body)
-		json.Unmarshal(b, &doc)
+		_ = json.Unmarshal(b, &doc)
 		w.WriteHeader(200)
 	}))
 	defer srv.Close()
@@ -56,7 +56,7 @@ func TestApplyFlag_DisabledSetsDisabledState(t *testing.T) {
 	var doc flagdDoc
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		b, _ := io.ReadAll(r.Body)
-		json.Unmarshal(b, &doc)
+		_ = json.Unmarshal(b, &doc)
 		w.WriteHeader(200)
 	}))
 	defer srv.Close()
